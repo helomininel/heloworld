@@ -27,6 +27,9 @@ const steps = recipe.instructions.map((s) => {
   return { title: m?.[1] ?? '', body: m ? m[2] : s };
 });
 
+const tips = recipe.tips ?? [];
+const sources = recipe.sources ?? [];
+
 const metadata = { title: recipe.title, description: recipe.desc };
 ---
 
@@ -203,7 +206,7 @@ const metadata = { title: recipe.title, description: recipe.desc };
     {
       ((recipe.tips?.length ?? 0) > 0 || recipe.gallery?.length) && (
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-8">
-          {(recipe.tips?.length ?? 0) > 0 && (
+          {tips.length > 0 && (
             <section
               class:list={[
                 'p-5 md:p-6 rounded-xl border border-[#F6D3C6] space-y-2',
@@ -217,7 +220,7 @@ const metadata = { title: recipe.title, description: recipe.desc };
                 <h3 class="text-xs font-bold uppercase tracking-widest">Tips &amp; Notes</h3>
               </div>
               <ul class="sm:grid sm:grid-cols-2 sm:gap-x-8 gap-y-1 text-sm text-[#2E2825] leading-relaxed list-disc list-inside">
-                {recipe.tips.map((tip) => (
+                {tips.map((tip) => (
                   <li>{tip}</li>
                 ))}
               </ul>
@@ -240,11 +243,11 @@ const metadata = { title: recipe.title, description: recipe.desc };
 
     <!-- Full-width: sources -->
     {
-      (recipe.sources?.length ?? 0) > 0 && (
+      sources.length > 0 && (
         <section class="px-6 py-6 md:px-8 md:py-6 rounded-xl border border-[#F6D3C6] space-y-10">
           <span class="text-xs font-bold text-[#2A6564] uppercase tracking-widest">Recipe Sources</span>
           <ul class="flex flex-wrap gap-x-6 gap-y-1 text-sm text-[#2E2825]">
-            {recipe.sources.map((s, si) => (
+            {sources.map((s, si) => (
               <li class="flex items-center gap-3">
                 {si > 0 && <span class="w-1.5 h-1.5 rounded-full bg-[#C85A32]/40" aria-hidden="true" />}
                 <a

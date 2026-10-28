@@ -2,7 +2,7 @@
 import Layout from '~/layouts/PageLayout.astro';
 import Image from '~/components/common/Image.astro';
 import { socialUrls } from '~/navigation';
-import { getPermalink, getBlogPermalink } from '~/utils/permalinks';
+import { getPermalink } from '~/utils/permalinks';
 import headShot from '~/assets/images/head_shot.jpg';
 
 const metadata = {
@@ -27,7 +27,10 @@ const travelHref = getPermalink('/travel');
           <span class="text-[#C85A32]">✦</span>
           <span data-i18n="hero.badge">Exploring data, fibers &amp; flavors</span>
         </div>
-        <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-[#2E2825] mt-6" data-i18n-html="hero.title">
+        <h1
+          class="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-[#2E2825] mt-6"
+          data-i18n-html="hero.title"
+        >
           Hello, world! <span class="text-[#C85A32]">I'm Helo.</span>
         </h1>
         <p class="text-xl md:text-2xl text-[#6B5E57] font-normal leading-relaxed" data-i18n="hero.subtitle">
@@ -46,7 +49,10 @@ const travelHref = getPermalink('/travel');
             >
               <span class="material-symbols-outlined text-2xl">query_stats</span>
             </div>
-            <h3 class="font-bold text-lg text-[#2E2825] group-hover:text-[#0F766E] transition-colors mb-2" data-i18n="cards.data.title">
+            <h3
+              class="font-bold text-lg text-[#2E2825] group-hover:text-[#0F766E] transition-colors mb-2"
+              data-i18n="cards.data.title"
+            >
               Data &amp; Analytics
             </h3>
             <p class="text-xs text-[#6B5E57] leading-relaxed mb-4" data-i18n="cards.data.desc">
@@ -71,7 +77,12 @@ const travelHref = getPermalink('/travel');
             >
               <span class="material-symbols-outlined text-2xl">skillet</span>
             </div>
-            <h3 class="font-bold text-lg text-[#2E2825] group-hover:text-[#C85A32] transition-colors mb-2" data-i18n="cards.recipes.title">Recipes</h3>
+            <h3
+              class="font-bold text-lg text-[#2E2825] group-hover:text-[#C85A32] transition-colors mb-2"
+              data-i18n="cards.recipes.title"
+            >
+              Recipes
+            </h3>
             <p class="text-xs text-[#6B5E57] leading-relaxed mb-4" data-i18n="cards.recipes.desc">
               Recipes I've tried, favorites I've collected, and kitchen experiments worth sharing.
             </p>
@@ -94,7 +105,10 @@ const travelHref = getPermalink('/travel');
             >
               <span class="material-symbols-outlined text-2xl">gesture</span>
             </div>
-            <h3 class="font-bold text-lg text-[#2E2825] group-hover:text-[#BE123C] transition-colors mb-2" data-i18n="cards.crafts.title">
+            <h3
+              class="font-bold text-lg text-[#2E2825] group-hover:text-[#BE123C] transition-colors mb-2"
+              data-i18n="cards.crafts.title"
+            >
               Crafts &amp; DIY
             </h3>
             <p class="text-xs text-[#6B5E57] leading-relaxed mb-4" data-i18n="cards.crafts.desc">
@@ -119,7 +133,10 @@ const travelHref = getPermalink('/travel');
             >
               <span class="material-symbols-outlined text-2xl">explore</span>
             </div>
-            <h3 class="font-bold text-lg text-[#2E2825] group-hover:text-[#B45309] transition-colors mb-2" data-i18n="cards.travel.title">
+            <h3
+              class="font-bold text-lg text-[#2E2825] group-hover:text-[#B45309] transition-colors mb-2"
+              data-i18n="cards.travel.title"
+            >
               Travel Journal
             </h3>
             <p class="text-xs text-[#6B5E57] leading-relaxed mb-4" data-i18n="cards.travel.desc">
@@ -173,18 +190,54 @@ const travelHref = getPermalink('/travel');
       </div>
       <div class="w-full border-t border-[#F6D3C6]/60 pt-6 mt-6">
         <div class="flex flex-wrap gap-2 items-center">
-          <span class="bg-[#E6F4F1] border border-[#99F6E4] text-[#0F766E] text-xs font-semibold rounded-full px-3 py-1" data-i18n="tag.sql">SQL</span>
-          <span class="bg-[#E6F4F1] border border-[#99F6E4] text-[#0F766E] text-xs font-semibold rounded-full px-3 py-1" data-i18n="tag.python">Python</span>
-          <span class="bg-[#E6F4F1] border border-[#99F6E4] text-[#0F766E] text-xs font-semibold rounded-full px-3 py-1" data-i18n="tag.storytelling">Storytelling</span>
-          <span class="bg-[#FFEDD5] border border-[#FDBA74] text-[#C85A32] text-xs font-semibold rounded-full px-3 py-1" data-i18n="tag.cooking">Cooking</span>
-          <span class="bg-[#FFEDD5] border border-[#FDBA74] text-[#C85A32] text-xs font-semibold rounded-full px-3 py-1" data-i18n="tag.baking">Baking</span>
-          <span class="bg-[#FFEDD5] border border-[#FDBA74] text-[#C85A32] text-xs font-semibold rounded-full px-3 py-1" data-i18n="tag.experimenting">Experimenting</span>
-          <span class="bg-[#FFE4E6] border border-[#FECDD3] text-[#BE123C] text-xs font-semibold rounded-full px-3 py-1" data-i18n="tag.crochet">Crochet</span>
-          <span class="bg-[#FFE4E6] border border-[#FECDD3] text-[#BE123C] text-xs font-semibold rounded-full px-3 py-1" data-i18n="tag.pottery">Pottery</span>
-          <span class="bg-[#FFE4E6] border border-[#FECDD3] text-[#BE123C] text-xs font-semibold rounded-full px-3 py-1" data-i18n="tag.scrapbooking">Scrapbooking</span>
-          <span class="bg-[#FEF3C7] border border-[#FDE68A] text-[#B45309] text-xs font-semibold rounded-full px-3 py-1" data-i18n="tag.planning">Planning trips</span>
-          <span class="bg-[#FEF3C7] border border-[#FDE68A] text-[#B45309] text-xs font-semibold rounded-full px-3 py-1" data-i18n="tag.traveling">Traveling</span>
-          <span class="bg-[#FEF3C7] border border-[#FDE68A] text-[#B45309] text-xs font-semibold rounded-full px-3 py-1" data-i18n="tag.hiking">Hiking</span>
+          <span
+            class="bg-[#E6F4F1] border border-[#99F6E4] text-[#0F766E] text-xs font-semibold rounded-full px-3 py-1"
+            data-i18n="tag.sql">SQL</span
+          >
+          <span
+            class="bg-[#E6F4F1] border border-[#99F6E4] text-[#0F766E] text-xs font-semibold rounded-full px-3 py-1"
+            data-i18n="tag.python">Python</span
+          >
+          <span
+            class="bg-[#E6F4F1] border border-[#99F6E4] text-[#0F766E] text-xs font-semibold rounded-full px-3 py-1"
+            data-i18n="tag.storytelling">Storytelling</span
+          >
+          <span
+            class="bg-[#FFEDD5] border border-[#FDBA74] text-[#C85A32] text-xs font-semibold rounded-full px-3 py-1"
+            data-i18n="tag.cooking">Cooking</span
+          >
+          <span
+            class="bg-[#FFEDD5] border border-[#FDBA74] text-[#C85A32] text-xs font-semibold rounded-full px-3 py-1"
+            data-i18n="tag.baking">Baking</span
+          >
+          <span
+            class="bg-[#FFEDD5] border border-[#FDBA74] text-[#C85A32] text-xs font-semibold rounded-full px-3 py-1"
+            data-i18n="tag.experimenting">Experimenting</span
+          >
+          <span
+            class="bg-[#FFE4E6] border border-[#FECDD3] text-[#BE123C] text-xs font-semibold rounded-full px-3 py-1"
+            data-i18n="tag.crochet">Crochet</span
+          >
+          <span
+            class="bg-[#FFE4E6] border border-[#FECDD3] text-[#BE123C] text-xs font-semibold rounded-full px-3 py-1"
+            data-i18n="tag.pottery">Pottery</span
+          >
+          <span
+            class="bg-[#FFE4E6] border border-[#FECDD3] text-[#BE123C] text-xs font-semibold rounded-full px-3 py-1"
+            data-i18n="tag.scrapbooking">Scrapbooking</span
+          >
+          <span
+            class="bg-[#FEF3C7] border border-[#FDE68A] text-[#B45309] text-xs font-semibold rounded-full px-3 py-1"
+            data-i18n="tag.planning">Planning trips</span
+          >
+          <span
+            class="bg-[#FEF3C7] border border-[#FDE68A] text-[#B45309] text-xs font-semibold rounded-full px-3 py-1"
+            data-i18n="tag.traveling">Traveling</span
+          >
+          <span
+            class="bg-[#FEF3C7] border border-[#FDE68A] text-[#B45309] text-xs font-semibold rounded-full px-3 py-1"
+            data-i18n="tag.hiking">Hiking</span
+          >
         </div>
       </div>
     </section>
@@ -194,7 +247,9 @@ const travelHref = getPermalink('/travel');
       id="connect"
     >
       <div class="space-y-1">
-        <div class="text-xs font-bold text-[#C85A32] uppercase tracking-wide" data-i18n="connect.label">Open for collaborations &amp; chats</div>
+        <div class="text-xs font-bold text-[#C85A32] uppercase tracking-wide" data-i18n="connect.label">
+          Open for collaborations &amp; chats
+        </div>
         <h2 class="text-2xl md:text-3xl font-bold text-[#2E2825]" data-i18n="connect.title">Let's connect</h2>
         <p class="text-sm text-[#6B5E57] max-w-xl" data-i18n="connect.desc">
           Have a question about data modeling, a recipe tip, a craft idea, or just want to say hi? I'd love to hear from
