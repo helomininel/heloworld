@@ -113,7 +113,7 @@ const ensureMenu = (l: ShareLabels): HTMLDivElement | null => {
     <button type="button" data-share="facebook" class="w-full text-left px-4 py-2 hover:bg-[#FFF1EC] text-[#2E2825] flex items-center gap-2">${l.menu.facebook}</button>
     <button type="button" data-share="x" class="w-full text-left px-4 py-2 hover:bg-[#FFF1EC] text-[#2E2825] flex items-center gap-2">${l.menu.x}</button>
     <button type="button" data-share="copy" class="w-full text-left px-4 py-2 hover:bg-[#FFF1EC] text-[#2E2825] flex items-center gap-2">${l.menu.copy}</button>
-    ${navigator.share ? `<button type="button" data-share="native" class="w-full text-left px-4 py-2 hover:bg-[#FFF1EC] text-[#2E2825] flex items-center gap-2">${l.menu.native}</button>` : ''}
+    ${'share' in navigator ? `<button type="button" data-share="native" class="w-full text-left px-4 py-2 hover:bg-[#FFF1EC] text-[#2E2825] flex items-center gap-2">${l.menu.native}</button>` : ''}
   `;
   document.body.appendChild(menu);
 
@@ -149,7 +149,11 @@ const ensureMenu = (l: ShareLabels): HTMLDivElement | null => {
   if (!globalWired) {
     globalWired = true;
     document.addEventListener('click', (e) => {
-      if (ctx && !menu?.contains(e.target as HTMLElement) && !(e.target as HTMLElement).closest('.share-btn, #page-share-btn'))
+      if (
+        ctx &&
+        !menu?.contains(e.target as HTMLElement) &&
+        !(e.target as HTMLElement).closest('.share-btn, #page-share-btn')
+      )
         closeShareMenu();
     });
     window.addEventListener('scroll', closeShareMenu, { passive: true });

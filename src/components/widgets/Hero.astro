@@ -71,7 +71,10 @@ const imageWhole = imageAspect === 'auto';
               <div class="max-w-xs sm:max-w-md m-auto flex flex-wrap justify-center gap-4 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
                 {Array.isArray(actions) ? (
                   actions.map((action) => (
-                    <Button {...(action || {})} class="w-24 h-24 p-0 flex flex-col items-center justify-center gap-1 rounded-lg" />
+                    <Button
+                      {...(action || {})}
+                      class="w-24 h-24 p-0 flex flex-col items-center justify-center gap-1 rounded-lg"
+                    />
                   ))
                 ) : (
                   <Fragment set:html={actions} />

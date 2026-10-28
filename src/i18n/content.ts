@@ -26,24 +26,20 @@ export const translations: Record<Lang, Record<string, string>> = {
     // Hero
     'hero.badge': 'Exploring data, fibers & flavors',
     'hero.title': `Hello, world! <span class="text-[#C85A32]">I'm Helo.</span>`,
-    'hero.subtitle':
-      'Welcome to my little corner of the internet, where I share what I learn, make, and discover.',
+    'hero.subtitle': 'Welcome to my little corner of the internet, where I share what I learn, make, and discover.',
 
     // Category cards
     'cards.data.title': 'Data & Analytics',
     'cards.data.desc': "Data projects, articles, and things I've learned along the way.",
     'cards.data.cta': 'Browse projects & articles →',
     'cards.recipes.title': 'Recipes',
-    'cards.recipes.desc':
-      "Recipes I've tried, favorites I've collected, and kitchen experiments worth sharing.",
+    'cards.recipes.desc': "Recipes I've tried, favorites I've collected, and kitchen experiments worth sharing.",
     'cards.recipes.cta': 'Explore recipes →',
     'cards.crafts.title': 'Crafts & DIY',
-    'cards.crafts.desc':
-      "Things I'm making, new hobbies I'm trying, and creative projects in progress.",
+    'cards.crafts.desc': "Things I'm making, new hobbies I'm trying, and creative projects in progress.",
     'cards.crafts.cta': 'View gallery →',
     'cards.travel.title': 'Travel Journal',
-    'cards.travel.desc':
-      "Places I've visited, little discoveries, travel notes, and tips for future adventures.",
+    'cards.travel.desc': "Places I've visited, little discoveries, travel notes, and tips for future adventures.",
     'cards.travel.cta': 'Read journeys →',
 
     // About me
@@ -92,8 +88,7 @@ export const translations: Record<Lang, Record<string, string>> = {
     // Hero
     'hero.badge': 'Explorando dados, fibras & sabores',
     'hero.title': `Olá, mundo! <span class="text-[#C85A32]">Eu sou a Helo.</span>`,
-    'hero.subtitle':
-      'Boas-vindas ao meu cantinho na internet, onde compartilho o que aprendo, crio e descubro.',
+    'hero.subtitle': 'Boas-vindas ao meu cantinho na internet, onde compartilho o que aprendo, crio e descubro.',
 
     // Category cards
     'cards.data.title': 'Dados & Análises',
@@ -108,8 +103,7 @@ export const translations: Record<Lang, Record<string, string>> = {
       'Coisas que estou criando, novos hobbies que estou experimentando e projetos criativos em andamento.',
     'cards.crafts.cta': 'Ver galeria →',
     'cards.travel.title': 'Diário de Viagem',
-    'cards.travel.desc':
-      'Lugares que visitei, pequenas descobertas, notas de viagem e dicas para futuras aventuras.',
+    'cards.travel.desc': 'Lugares que visitei, pequenas descobertas, notas de viagem e dicas para futuras aventuras.',
     'cards.travel.cta': 'Ler diários →',
 
     // About me
@@ -144,5 +138,4 @@ export const translations: Record<Lang, Record<string, string>> = {
   },
 };
 
-export const getLang = (): Lang =>
-  (localStorage.getItem(LANG_STORAGE_KEY) as Lang) === 'pt' ? 'pt' : 'en';
+export const getLang = (): Lang => ((localStorage.getItem(LANG_STORAGE_KEY) as Lang) === 'pt' ? 'pt' : 'en');

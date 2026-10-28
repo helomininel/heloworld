@@ -11,7 +11,7 @@ metadata:
   title:
     default: HeloWorld
     template: '%s — HeloWorld'
-  description: "Data, crafts and places explored, all shared with joy. Welcome to my world!"
+  description: 'Data, crafts and places explored, all shared with joy. Welcome to my world!'
   robots:
     index: true
     follow: true
