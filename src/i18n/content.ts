@@ -70,7 +70,7 @@ export const translations: Record<Lang, Record<string, string>> = {
     'connect.label': 'Open for collaborations & chats',
     'connect.title': "Let's connect",
     'connect.desc':
-      "Have a question about data modeling, a recipe tip, a craft idea, or just want to say hi? I'd love to hear from you.",
+      "Have a question about data, a recipe tip, a craft idea, or just want to say hi? I'd love to hear from you.",
   },
 
   pt: {
