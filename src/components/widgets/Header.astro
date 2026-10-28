@@ -67,8 +67,9 @@ const persistKey = `header-${Array.from(
   <header
     class:list={[
       { sticky: isSticky, relative: !isSticky, dark: isDark },
-      'top-0 z-40 flex-none mx-auto w-full border-b border-gray-50/0 transition-[opacity] ease-in-out',
+      'top-0 z-50 flex-none mx-auto w-full transition-[opacity] ease-in-out backdrop-blur-md border-b border-[#F6D3C6]/60',
     ]}
+    style="background-color: rgba(255,248,246,0.95);"
     {...isSticky ? { 'data-aw-sticky-header': true } : {}}
     {...id ? { id } : {}}
   >
@@ -100,7 +101,8 @@ const persistKey = `header-${Array.from(
         aria-label="Main navigation"
       >
         <ul
-          class="flex flex-col lg:flex-row lg:self-center w-full lg:w-auto text-xl lg:text-[0.9375rem] tracking-[0.01rem] font-medium lg:justify-center"
+          class="flex flex-col lg:flex-row lg:self-center w-full lg:w-auto text-xl lg:text-[0.9375rem] tracking-[0.01rem] font-medium lg:justify-center uppercase"
+          style="font-family: 'Montserrat', sans-serif;"
         >
           {
             links.map(({ text, href, links }) => (

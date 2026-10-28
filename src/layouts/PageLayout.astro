@@ -1,35 +1,181 @@
 ---
 import Layout from '~/layouts/Layout.astro';
-import Header from '~/components/widgets/Header.astro';
-import Footer from '~/components/widgets/Footer.astro';
-import Announcement from '~/components/widgets/Announcement.astro';
-
-import { headerData, footerData } from '~/navigation';
+import { socialUrls } from '~/navigation';
+import { translations, type Lang } from '~/i18n/content';
+import { SITE } from 'astrowind:config';
+import { getPermalink, trimSlash } from '~/utils/permalinks';
 
 import type { MetaData } from '~/types';
 
 export interface Props {
   metadata?: MetaData;
+  /** Locale of the page rendering this layout: EN pages live at `/`, PT pages at `/pt/…`. */
+  lang?: Lang;
 }
 
-const { metadata } = Astro.props;
+const { metadata, lang = 'en' } = Astro.props;
+
+const t = translations[lang];
+
+// Locale-aware internal hrefs (the `data`/`travel` sections don't have PT
+// translations yet, so they go to the PT blog placeholder instead of
+// switching the visitor back to English).
+const locale = (path: string) => (lang === 'pt' ? `/pt${path === '/' ? '' : path}` : path);
+const homeHref = getPermalink(locale('/'));
+const aboutHref = `${homeHref}#about`;
+const dataHref = getPermalink(locale('/data'));
+const recipesHref = getPermalink(locale('/recipes'));
+const craftsHref = getPermalink(locale('/crochet'));
+const travelHref = getPermalink(locale('/travel'));
+const connectHref = `${homeHref}#connect`;
+
+const currentPath = `/${trimSlash(Astro.url.pathname)}`;
+const homePath = `/${trimSlash(homeHref)}`;
+const isCurrent = (href: string) => {
+  const linkPath = `/${trimSlash(href.split('#')[0])}`;
+  if (linkPath === currentPath) return true;
+  // Highlight the section pill on its subpages (e.g. /recipes/<slug> →
+  // Recipes), but never Home — it's the site root, so it only matches exactly.
+  return linkPath !== homePath && currentPath.startsWith(`${linkPath}/`);
+};
+
+const navClass = (href: string, active = isCurrent(href)) =>
+  [
+    'px-4 py-1.5 rounded-full text-sm font-semibold transition-colors hover:text-[#C85A32]',
+    active ? 'bg-[#F6D3C6] text-[#C85A32] font-bold' : 'text-[#6B5E57]',
+  ].join(' ');
+
+// Language switch: links between the EN and PT versions of the current page.
+// PT variants exist for these pages; other pages fall back to the PT home.
+const PT_PAGES = new Set(['/', '/recipes', '/crochet', '/data', '/blog', '/travel']);
+const base = SITE.base || '';
+const norm = (p: string) => '/' + trimSlash(p);
+const rel = norm(Astro.url.pathname.slice(base.length)); // e.g. '/recipes', '/', '/pt'
+const isPT = rel === '/pt' || rel.startsWith('/pt/');
+const enRel = isPT ? norm(rel.slice(3)) : rel;
+const enHref = getPermalink(enRel);
+// Already on a PT page → the PT pill keeps you exactly where you are.
+const ptHref = isPT
+  ? Astro.url.pathname
+  : PT_PAGES.has(enRel)
+    ? getPermalink(enRel === '/' ? '/pt' : `/pt${enRel}`)
+    : getPermalink('/pt');
 ---
 
 <Layout metadata={metadata}>
   <slot name="head" slot="head" />
-  {
-    /*
-    Slot fallbacks are rendered explicitly. With `<slot name="x">fallback</slot>`
-    Astro still evaluates the fallback when the page overrides the slot, and
-    astro-icon then believes the icons inside it (the RSS icon of the default
-    header, for instance) were already emitted, so their SVG sprite symbol
-    goes missing on that page.
-  */
-  }
-  {Astro.slots.has('announcement') ? <slot name="announcement" /> : <Announcement />}
-  {Astro.slots.has('header') ? <slot name="header" /> : <Header {...headerData} isSticky showRssFeed showToggleTheme />}
+  <header class="w-full bg-[#FFF8F6]/95 backdrop-blur-md sticky top-0 z-50 border-b border-[#F6D3C6]/60 transition-all">
+    <div class="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
+      <a class="flex items-center gap-2.5 group cursor-pointer text-left" href={homeHref}>
+        <div
+          class="w-10 h-10 rounded-full bg-[#C85A32] flex items-center justify-center text-white shadow-sm transition-transform group-hover:scale-105"
+        >
+          <span class="material-symbols-outlined text-xl">wb_sunny</span>
+        </div>
+        <div>
+          <span class="text-xl font-extrabold tracking-tight text-[#2E2825] block leading-none">HeloWorld</span>
+          <span class="text-[11px] font-medium text-[#6B5E57] tracking-wider uppercase">{t['brand.tagline']}</span>
+        </div>
+      </a>
+      <nav class="hidden md:flex items-center gap-1 bg-[#FFF1EC] p-1.5 rounded-full border border-[#F6D3C6]">
+        <a id="nav-home" class={navClass(homeHref)} href={homeHref}>{t['nav.home']}</a>
+        <a id="nav-about" class={navClass(aboutHref, false)} href={aboutHref}>{t['nav.about']}</a>
+        <a class={navClass(dataHref)} href={dataHref}>{t['nav.data']}</a>
+        <a class={navClass(recipesHref)} href={recipesHref}>{t['nav.recipes']}</a>
+        <a class={navClass(craftsHref)} href={craftsHref}>{t['nav.crafts']}</a>
+        <a class={navClass(travelHref)} href={travelHref}>{t['nav.travel']}</a>
+      </nav>
+      <div class="flex items-center gap-3">
+        <div class="flex items-center text-xs font-bold bg-[#FFF1EC] border border-[#F6D3C6] rounded-full p-1">
+          <a
+            href={enHref}
+            hreflang="en"
+            class:list={['px-2.5 py-0.5 rounded-full', !isPT ? 'bg-[#C85A32] text-white' : 'text-[#6B5E57] hover:text-[#C85A32]']}
+            aria-label="English"
+          >EN</a>
+          <a
+            href={ptHref}
+            hreflang="pt"
+            class:list={['px-2.5 py-0.5 rounded-full', isPT ? 'bg-[#C85A32] text-white' : 'text-[#6B5E57] hover:text-[#C85A32]']}
+            aria-label="Português"
+          >PT</a>
+        </div>
+        <a
+          class="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#C85A32] text-white text-xs font-semibold hover:bg-[#b04a25] transition-colors shadow-sm"
+          href={connectHref}
+        >
+          <span class="material-symbols-outlined text-sm">mail</span>
+          <span>{t['cta.connect']}</span>
+        </a>
+      </div>
+    </div>
+    <div class="md:hidden flex items-center justify-around border-t border-[#F6D3C6]/60 px-2 py-2 bg-[#FFF1EC] overflow-x-auto">
+      <a class="text-xs font-semibold text-[#6B5E57] py-1 px-2.5 rounded-full" href={homeHref}>{t['nav.home']}</a>
+      <a class="text-xs font-semibold text-[#6B5E57] py-1 px-2.5 rounded-full" href={aboutHref}>{t['nav.about']}</a>
+      <a class="text-xs font-semibold text-[#6B5E57] py-1 px-2.5 rounded-full" href={dataHref}>{t['nav.data']}</a>
+      <a class="text-xs font-semibold text-[#6B5E57] py-1 px-2.5 rounded-full" href={recipesHref}>{t['nav.recipes']}</a>
+      <a class="text-xs font-semibold text-[#6B5E57] py-1 px-2.5 rounded-full" href={craftsHref}>{t['nav.crafts']}</a>
+      <a class="text-xs font-semibold text-[#6B5E57] py-1 px-2.5 rounded-full" href={travelHref}>{t['nav.travel']}</a>
+    </div>
+  </header>
   <main class="flex-1">
     <slot />
   </main>
-  {Astro.slots.has('footer') ? <slot name="footer" /> : <Footer {...footerData} />}
+  <footer class="w-full bg-[#FFF1EC] border-t border-[#F6D3C6] py-8">
+    <div class="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="text-xs text-[#6B5E57]">
+        {t['footer.note']}
+      </div>
+      <div class="flex items-center gap-4">
+        <a class="text-[#6B5E57] hover:text-[#C85A32]" href={socialUrls.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+        </a>
+        <a class="text-[#6B5E57] hover:text-[#C85A32]" href={socialUrls.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+  <script>
+    // --- Scroll-spy (Home / About me pills) ---------------------------------
+
+    const ACTIVE = ['bg-[#F6D3C6]', 'text-[#C85A32]', 'font-bold'];
+    const INACTIVE = ['text-[#6B5E57]'];
+
+    const setActive = (el: Element | null, active: boolean) => {
+      if (!el) return;
+      for (const c of ACTIVE) el.classList.toggle(c, active);
+      for (const c of INACTIVE) el.classList.toggle(c, !active);
+    };
+
+    // Scroll-spy for the home page: exactly one of the two pills is
+    // highlighted at any moment. While the About section overlaps the
+    // viewport, "About me" wins; every other scroll position highlights
+    // Home. A single scroll listener keeps the state in sync synchronously,
+    // so the two pills can never be active together.
+    let spy: { about: HTMLElement; home: HTMLElement; aboutPill: HTMLElement } | null = null;
+
+    const update = () => {
+      if (!spy) return;
+      const rect = spy.about.getBoundingClientRect();
+      const aboutVisible = rect.top < window.innerHeight * 0.6 && rect.bottom > 96;
+      setActive(spy.aboutPill, aboutVisible);
+      setActive(spy.home, !aboutVisible);
+    };
+
+    const bind = () => {
+      const about = document.getElementById('about');
+      const home = document.getElementById('nav-home');
+      const aboutPill = document.getElementById('nav-about');
+
+      // Only the home page has the #about section; elsewhere the
+      // server-rendered active state stands and the spy is disengaged.
+      spy = about && home && aboutPill ? { about, home, aboutPill } : null;
+      update();
+    };
+
+    window.addEventListener('scroll', update, { passive: true });
+    document.addEventListener('DOMContentLoaded', bind);
+    document.addEventListener('astro:page-load', bind);
+  </script>
 </Layout>
