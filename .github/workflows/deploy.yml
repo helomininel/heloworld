@@ -27,6 +27,8 @@ jobs:
       # Installs dependencies and runs `npm run build` (output: ./dist)
       - name: Build with Astro
         uses: withastro/action@v3
+        with:
+          node-version: 24
 
   deploy:
     needs: build
