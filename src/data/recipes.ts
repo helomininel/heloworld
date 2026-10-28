@@ -310,10 +310,6 @@ const recipes: RecipeEntry[] = [
           label: 'Amo Pão Caseiro – Pão Recheado de Frango',
           url: 'https://amopaocaseiro.com.br/receita/pao-recheado-de-frango/',
         },
-        {
-          label: 'Amo Pão Caseiro – Video Tutorial',
-          url: 'https://www.youtube.com/watch?v=hx8R3ym9Gz4',
-        },
       ],
     },
     pt: {
@@ -371,10 +367,6 @@ const recipes: RecipeEntry[] = [
         {
           label: 'Amo Pão Caseiro – Pão Recheado de Frango',
           url: 'https://amopaocaseiro.com.br/receita/pao-recheado-de-frango/',
-        },
-        {
-          label: 'Amo Pão Caseiro – Vídeo Tutorial',
-          url: 'https://www.youtube.com/watch?v=hx8R3ym9Gz4',
         },
       ],
     },
