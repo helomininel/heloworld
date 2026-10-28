@@ -7,6 +7,9 @@ import headShot from '~/assets/images/head_shot.jpg';
 
 const metadata = {
   title: 'HeloWorld — Personal Portfolio & Craft Hub',
+  // The title already starts with "HeloWorld", so the '%s — HeloWorld'
+  // template would duplicate it in the social share title.
+  ignoreTitleTemplate: true,
   description:
     'Senior Data Analyst sharing data projects, creative hobbies, recipes, and little adventures along the way.',
 };

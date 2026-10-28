@@ -7,6 +7,9 @@ import headShot from '~/assets/images/head_shot.jpg';
 
 const metadata = {
   title: 'HeloWorld — Portfólio Pessoal & Hub de Criações',
+  // The title already starts with "HeloWorld", so the '%s — HeloWorld'
+  // template would duplicate it in the social share title.
+  ignoreTitleTemplate: true,
   description:
     'Analista de Dados sênior compartilhando projetos de dados, hobbies criativos, receitas e pequenas aventuras pelo caminho.',
 };
