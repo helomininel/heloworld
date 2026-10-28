@@ -46,7 +46,10 @@ const navClass = (href: string, active = isCurrent(href)) =>
   ].join(' ');
 
 // Language switch: links between the EN and PT versions of the current page.
-// PT variants exist for these pages; other pages fall back to the PT home.
+// PT variants exist for the top-level pages in PT_PAGES, and for recipe detail
+// pages (their slugs are language-independent, so /recipes/<id> always has a
+// /pt/recipes/<id> twin). Everything else (about, privacy, …) falls back to the
+// PT home instead of a dead link.
 const PT_PAGES = new Set(['/', '/recipes', '/crochet', '/data', '/blog', '/travel']);
 const base = SITE.base || '';
 const norm = (p: string) => '/' + trimSlash(p);
@@ -54,10 +57,12 @@ const rel = norm(Astro.url.pathname.slice(base.length)); // e.g. '/recipes', '/'
 const isPT = rel === '/pt' || rel.startsWith('/pt/');
 const enRel = isPT ? norm(rel.slice(3)) : rel;
 const enHref = getPermalink(enRel);
+// Recipe detail pages live in both languages; nested paths get a PT twin.
+const hasPTTwin = PT_PAGES.has(enRel) || /^\/recipes\/[^/]+$/.test(enRel);
 // Already on a PT page → the PT pill keeps you exactly where you are.
 const ptHref = isPT
   ? Astro.url.pathname
-  : PT_PAGES.has(enRel)
+  : hasPTTwin
     ? getPermalink(enRel === '/' ? '/pt' : `/pt${enRel}`)
     : getPermalink('/pt');
 ---
