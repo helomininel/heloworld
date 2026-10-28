@@ -58,7 +58,7 @@ export const translations: Record<Lang, Record<string, string>> = {
     'tag.storytelling': 'Storytelling',
     'tag.cooking': 'Cooking',
     'tag.baking': 'Baking',
-    'tag.experimenting': 'Experimenting',
+    'tag.experimenting': 'Recipe Testing',
     'tag.crochet': 'Crochet',
     'tag.pottery': 'Pottery',
     'tag.scrapbooking': 'Scrapbooking',
@@ -70,7 +70,7 @@ export const translations: Record<Lang, Record<string, string>> = {
     'connect.label': 'Open for collaborations & chats',
     'connect.title': "Let's connect",
     'connect.desc':
-      "Have a question about data modeling, a recipe tip, a craft idea, or just want to say hi? I'd love to hear from you.",
+      "Have a question about data, a recipe tip, a craft idea, or just want to say hi?<br />I'd love to hear from you.",
   },
 
   pt: {
@@ -122,7 +122,7 @@ export const translations: Record<Lang, Record<string, string>> = {
     'tag.storytelling': 'Storytelling',
     'tag.cooking': 'Culinária',
     'tag.baking': 'Confeitaria',
-    'tag.experimenting': 'Experimentar',
+    'tag.experimenting': 'Testar receitas',
     'tag.crochet': 'Crochê',
     'tag.pottery': 'Cerâmica',
     'tag.scrapbooking': 'Scrapbook',
@@ -134,7 +134,7 @@ export const translations: Record<Lang, Record<string, string>> = {
     'connect.label': 'Aberta para colaborações & conversas',
     'connect.title': 'Vamos conversar',
     'connect.desc':
-      'Tem uma pergunta sobre modelagem de dados, uma dica de receita, uma ideia de artesanato ou quer só dizer oi? Adoraria ouvir de você.',
+      'Tem uma pergunta sobre dados, uma dica de receita, uma ideia de artesanato ou quer só dizer oi?<br />Adoraria ouvir de você.',
   },
 };
 
