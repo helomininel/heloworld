@@ -1,0 +1,199 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import { getPermalink } from '~/utils/permalinks';
+import { socialUrls } from '~/navigation';
+
+const metadata = {
+  title: 'Data & Projects',
+};
+
+const repoUrl = 'https://github.com/helomininel/startup-success-tcc';
+
+// Articles will appear here once published — the section stays hidden until
+// then (see the conditional below and the filters array).
+const articles: {
+  tag: string;
+  time: string;
+  title: string;
+  desc: string;
+  href: string;
+  accent: 'primary' | 'secondary' | 'tertiary';
+}[] = [];
+
+const filters = [
+  { id: 'all', label: 'All' },
+  ...(articles.length ? [{ id: 'articles', label: 'Articles' }] : []),
+  { id: 'projects', label: 'Projects' },
+];
+
+const projects = [
+  {
+    name: 'startup-success-tcc',
+    subtitle: 'Startup Success Prediction Model',
+    desc: 'Final paper for my post-graduate course in Data Science and Big Data at PUC-MG — a machine learning model that predicts the success of startups, with exploratory analysis and prediction notebooks.',
+    tags: ['Python', 'Jupyter', 'Scikit-learn'],
+    href: repoUrl,
+    accent: 'primary',
+  },
+];
+
+// Accent → Tailwind literals (from the data_page.html palette).
+const accent = {
+  primary: {
+    pill: 'bg-[#ffe9e2] text-[#9f3c16]',
+    subtitle: 'text-[#9f3c16]',
+    blob: 'bg-[#ffdbce]/30',
+    cta: 'text-[#9f3c16] group-hover:text-[#bf542c]',
+    hover: 'group-hover:text-[#9f3c16]',
+  },
+  secondary: {
+    pill: 'bg-[#a6ecec]/50 text-[#1c6869]',
+    subtitle: 'text-[#1c6869]',
+    blob: 'bg-[#a9efee]/30',
+    cta: 'text-[#1c6869] group-hover:text-[#226d6d]',
+    hover: 'group-hover:text-[#1c6869]',
+  },
+  tertiary: {
+    pill: 'bg-[#ffddb0]/40 text-[#7d5400]',
+    subtitle: 'text-[#7d5400]',
+    blob: 'bg-[#ffddb0]/30',
+    cta: 'text-[#7d5400] group-hover:text-[#9e6a00]',
+    hover: 'group-hover:text-[#7d5400]',
+  },
+};
+---
+
+<Layout metadata={metadata}>
+  <!-- Ambient blur blobs -->
+  <div class="pointer-events-none fixed -top-24 -right-20 w-80 h-80 rounded-full bg-[#a9efee]/30 blur-3xl -z-10"></div>
+  <div class="pointer-events-none fixed top-1/3 -left-28 w-96 h-96 rounded-full bg-[#ffddb0]/35 blur-3xl -z-10"></div>
+  <div class="pointer-events-none fixed -bottom-24 right-1/4 w-96 h-96 rounded-full bg-[#ffdbce]/40 blur-3xl -z-10">
+  </div>
+
+  <div class="max-w-[1240px] mx-auto px-6 md:px-8 w-full py-10 flex flex-col gap-10">
+    <!-- Header & filter bar -->
+    <section class="flex flex-col md:flex-row items-start md:items-end justify-between gap-6">
+      <div class="flex flex-col max-w-2xl">
+        <div class="flex items-center gap-1 mb-1">
+          <span
+            class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#E8F3F1] border border-[#2A6564]/30 text-xs font-semibold text-[#2A6564]"
+          >
+            <span class="text-[#C85A32]">✦</span>
+            <span>Analysis, code &amp; articles</span>
+          </span>
+        </div>
+        <h1
+          class="text-[38px] md:text-[56px] leading-[46px] md:leading-[64px] tracking-[-0.02em] font-extrabold text-[#291710]"
+        >
+          Data &amp; Projects
+        </h1>
+        <p class="text-[18px] leading-[28px] text-[#57423b] mt-1">
+          Data projects, articles, and things I've learned along the way.
+        </p>
+      </div>
+      <div
+        id="data-filters"
+        class="flex items-center gap-2 p-1.5 bg-[#fff1ec] rounded-full shadow-sm self-stretch md:self-auto overflow-x-auto"
+      >
+        {
+          filters.map((f, i) => (
+            <button
+              type="button"
+              data-filter={f.id}
+              class:list={[
+                'px-4 py-1.5 rounded-full text-[13px] font-bold tracking-[0.03em] transition-all whitespace-nowrap',
+                i === 0
+                  ? 'bg-white text-[#9f3c16] shadow-sm'
+                  : 'text-[#57423b] hover:text-[#291710] hover:bg-[#ffe9e2]',
+              ]}
+            >
+              {f.label}
+            </button>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section class="filter-section flex flex-col gap-4" data-category="projects">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded-full bg-[#ffdbce] text-[#9f3c16] flex items-center justify-center">
+          <span class="material-symbols-outlined text-lg">terminal</span>
+        </div>
+        <h2 class="text-[28px] leading-[36px] font-bold text-[#291710]">Projects</h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {
+          projects.map((p) => {
+            const c = accent[p.accent as keyof typeof accent];
+            return (
+              <div class="p-6 bg-white rounded-lg shadow-sm flex flex-col justify-between hover:shadow-md transition-all duration-300 hover:-translate-y-1">
+                <div>
+                  <div class="flex items-center justify-between mb-2">
+                    <span class="text-[22px] leading-[30px] font-semibold text-[#291710] tracking-tight">{p.name}</span>
+                  </div>
+                  <p class={`text-[13px] font-bold tracking-[0.03em] mb-1 ${c.subtitle}`}>{p.subtitle}</p>
+                  <p class="text-sm leading-5 text-[#57423b] leading-relaxed mb-4">{p.desc}</p>
+                  <div class="flex flex-wrap gap-1.5 mb-6">
+                    {p.tags.map((t) => (
+                      <span class="px-2.5 py-0.5 rounded-full bg-[#fff1ec] text-[#291710] text-[11px] font-extrabold tracking-[0.04em]">
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                <div class="flex items-center justify-between pt-2">
+                  <a
+                    class="px-4 py-2 rounded-full bg-[#fff1ec] hover:bg-[#ffe9e2] text-[#291710] text-[13px] font-bold tracking-[0.03em] inline-flex items-center gap-1.5 transition-colors"
+                    href={p.href}
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    <span class="material-symbols-outlined text-base">code</span> View Code
+                  </a>
+                </div>
+              </div>
+            );
+          })
+        }
+      </div>
+    </section>
+  </div>
+</Layout>
+
+<script>
+  // Category filter: All / Articles / Projects. Re-binds on every
+  // `astro:page-load` (view transitions replace the body, so listeners must be
+  // re-attached; the `bound` marker prevents double-binding within one DOM).
+  const initPage = () => {
+    const filterWrap = document.getElementById('data-filters');
+    if (!filterWrap || filterWrap.dataset.bound) return;
+    filterWrap.dataset.bound = '1';
+
+    const buttons = Array.from(filterWrap.querySelectorAll<HTMLElement>('[data-filter]'));
+    const sections = Array.from(document.querySelectorAll<HTMLElement>('.filter-section'));
+
+    const applyFilter = (filter: string) => {
+      sections.forEach((sec) => {
+        const show = filter === 'all' || filter === sec.dataset.category;
+        sec.style.display = show ? 'flex' : 'none';
+      });
+    };
+
+    buttons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        buttons.forEach((b) => {
+          b.classList.remove('bg-white', 'text-[#9f3c16]', 'shadow-sm');
+          b.classList.add('text-[#57423b]');
+        });
+        btn.classList.add('bg-white', 'text-[#9f3c16]', 'shadow-sm');
+        btn.classList.remove('text-[#57423b]');
+        applyFilter(btn.dataset.filter ?? 'all');
+      });
+    });
+  };
+
+  document.addEventListener('astro:page-load', initPage);
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initPage);
+  else initPage();
+</script>

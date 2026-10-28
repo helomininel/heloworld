@@ -1,0 +1,204 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Image from '~/components/common/Image.astro';
+import { socialUrls } from '~/navigation';
+import { getPermalink, getBlogPermalink } from '~/utils/permalinks';
+import headShot from '~/assets/images/head_shot.jpg';
+
+const metadata = {
+  title: 'HeloWorld — Portfólio Pessoal & Hub de Criações',
+  description:
+    'Analista de Dados sênior compartilhando projetos de dados, hobbies criativos, receitas e pequenas aventuras pelo caminho.',
+};
+
+const dataHref = getPermalink('/pt/data');
+const recipesHref = getPermalink('/pt/recipes');
+const craftsHref = getPermalink('/pt/crochet');
+const travelHref = getPermalink('/pt/travel');
+---
+
+<Layout metadata={metadata} lang="pt">
+  <div class="max-w-6xl mx-auto px-6 py-6 md:py-8 w-full space-y-8">
+    <section class="min-h-[calc(100vh-8rem)] flex flex-col gap-8 pt-2">
+      <div class="space-y-4 relative w-full">
+        <div
+          class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#E8F3F1] border border-[#2A6564]/30 text-xs font-semibold text-[#2A6564]"
+        >
+          <span class="text-[#C85A32]">✦</span>
+          <span>Explorando dados, fibras &amp; sabores</span>
+        </div>
+        <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-[#2E2825] mt-6">
+          Olá, mundo! <span class="text-[#C85A32]">Eu sou a Helo.</span>
+        </h1>
+        <p class="text-xl md:text-2xl text-[#6B5E57] font-normal leading-relaxed">
+          Boas-vindas ao meu cantinho na internet, onde compartilho o que aprendo, crio e descubro.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
+        <a
+          class="cursor-pointer group p-6 rounded-2xl bg-white border border-[#99F6E4]/50 hover:border-[#0F766E] shadow-sm hover:shadow-md transition-all flex flex-col justify-between"
+          href={dataHref}
+        >
+          <div>
+            <div
+              class="w-12 h-12 rounded-xl bg-[#E6F4F1] text-[#0F766E] flex items-center justify-center mb-4 transition-transform group-hover:scale-110"
+            >
+              <span class="material-symbols-outlined text-2xl">query_stats</span>
+            </div>
+            <h3 class="font-bold text-lg text-[#2E2825] group-hover:text-[#0F766E] transition-colors mb-2">
+              Dados &amp; Análises
+            </h3>
+            <p class="text-xs text-[#6B5E57] leading-relaxed mb-4">
+              Projetos de dados, artigos e coisas que aprendi pelo caminho.
+            </p>
+          </div>
+          <span class="text-xs font-bold text-[#0F766E] inline-flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
+            Ver projetos &amp; artigos →
+          </span>
+        </a>
+
+        <a
+          class="cursor-pointer group p-6 rounded-2xl bg-white border border-[#FDBA74]/50 hover:border-[#C85A32] shadow-sm hover:shadow-md transition-all flex flex-col justify-between"
+          href={recipesHref}
+        >
+          <div>
+            <div
+              class="w-12 h-12 rounded-xl bg-[#FFEDD5] text-[#C85A32] flex items-center justify-center mb-4 transition-transform group-hover:scale-110"
+            >
+              <span class="material-symbols-outlined text-2xl">skillet</span>
+            </div>
+            <h3 class="font-bold text-lg text-[#2E2825] group-hover:text-[#C85A32] transition-colors mb-2">Receitas</h3>
+            <p class="text-xs text-[#6B5E57] leading-relaxed mb-4">
+              Receitas que já testei, favoritas que colecionei e experimentos de cozinha que valem a pena compartilhar.
+            </p>
+          </div>
+          <span class="text-xs font-bold text-[#C85A32] inline-flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
+            Explorar receitas →
+          </span>
+        </a>
+
+        <a
+          class="cursor-pointer group p-6 rounded-2xl bg-white border border-[#FECDD3]/60 hover:border-[#BE123C] shadow-sm hover:shadow-md transition-all flex flex-col justify-between"
+          href={craftsHref}
+        >
+          <div>
+            <div
+              class="w-12 h-12 rounded-xl bg-[#FFE4E6] text-[#BE123C] flex items-center justify-center mb-4 transition-transform group-hover:scale-110"
+            >
+              <span class="material-symbols-outlined text-2xl">gesture</span>
+            </div>
+            <h3 class="font-bold text-lg text-[#2E2825] group-hover:text-[#BE123C] transition-colors mb-2">
+              Artesanato &amp; DIY
+            </h3>
+            <p class="text-xs text-[#6B5E57] leading-relaxed mb-4">
+              Coisas que estou criando, novos hobbies que estou experimentando e projetos criativos em andamento.
+            </p>
+          </div>
+          <span class="text-xs font-bold text-[#BE123C] inline-flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
+            Ver galeria →
+          </span>
+        </a>
+
+        <a
+          class="cursor-pointer group p-6 rounded-2xl bg-white border border-[#FDE68A]/60 hover:border-[#B45309] shadow-sm hover:shadow-md transition-all flex flex-col justify-between"
+          href={dataHref}
+        >
+          <div>
+            <div
+              class="w-12 h-12 rounded-xl bg-[#FEF3C7] text-[#B45309] flex items-center justify-center mb-4 transition-transform group-hover:scale-110"
+            >
+              <span class="material-symbols-outlined text-2xl">explore</span>
+            </div>
+            <h3 class="font-bold text-lg text-[#2E2825] group-hover:text-[#B45309] transition-colors mb-2">
+              Diário de Viagem
+            </h3>
+            <p class="text-xs text-[#6B5E57] leading-relaxed mb-4">
+              Lugares que visitei, pequenas descobertas, notas de viagem e dicas para futuras aventuras.
+            </p>
+          </div>
+          <span class="text-xs font-bold text-[#B45309] inline-flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
+            Ler diários →
+          </span>
+        </a>
+      </div>
+    </section>
+
+    <section class="p-8 md:p-12 rounded-3xl bg-[#FFF1EC] border border-[#F6D3C6] flex flex-col items-center scroll-mt-24" id="about">
+      <div class="flex flex-col md:flex-row gap-8 md:gap-12 items-center w-full">
+        <div
+          class="relative w-64 h-64 md:w-80 md:h-80 shrink-0 rounded-2xl overflow-hidden shadow-md border-4 border-white bg-[#E8F3F1] flex items-center justify-center"
+        >
+          <Image alt="Helo" class="w-full h-full object-cover" layout="cover" format="webp" src={headShot} />
+          <div
+            class="absolute bottom-3 left-3 right-3 bg-white/95 backdrop-blur-sm rounded-full py-1.5 text-center text-xs font-semibold text-[#2E2825]"
+          >
+            ● Analista de Dados Sênior
+          </div>
+        </div>
+        <div class="space-y-4 flex-1">
+          <h2 class="text-3xl md:text-4xl font-extrabold text-[#2E2825]">Um Pouquinho Sobre Mim</h2>
+          <p class="text-base md:text-lg text-[#6B5E57] leading-relaxed">
+            Sou a Helo, analista de dados sênior que passa bastante tempo trabalhando com dados, resolvendo problemas e
+            encontrando padrões. Fora do trabalho, gosto de experimentar novos hobbies, criar coisas, testar receitas e
+            explorar lugares novos.
+          </p>
+          <p class="text-base md:text-lg text-[#6B5E57] leading-relaxed">
+            O HeloWorld é meu cantinho na internet para documentar as coisas que aprendo e experimento pelo caminho.
+            Alguns projetos podem ser cuidadosamente planejados; outros podem começar só com um pouco de curiosidade e
+            vontade de tentar algo novo.
+          </p>
+          <p class="text-base md:text-lg text-[#6B5E57] leading-relaxed">
+            Não estou tentando ser especialista em tudo o que compartilho. Eu só gosto de aprender e criar coisas, e
+            agora quero começar a documentar o processo também. Quem sabe, assim, compartilho algo útil ou inspirador
+            com outra pessoa pelo caminho.
+          </p>
+        </div>
+      </div>
+      <div class="w-full border-t border-[#F6D3C6]/60 pt-6 mt-6">
+        <div class="flex flex-wrap gap-2 items-center">
+          <span class="bg-[#E6F4F1] border border-[#99F6E4] text-[#0F766E] text-xs font-semibold rounded-full px-3 py-1">SQL</span>
+          <span class="bg-[#E6F4F1] border border-[#99F6E4] text-[#0F766E] text-xs font-semibold rounded-full px-3 py-1">Python</span>
+          <span class="bg-[#E6F4F1] border border-[#99F6E4] text-[#0F766E] text-xs font-semibold rounded-full px-3 py-1">Storytelling</span>
+          <span class="bg-[#FFEDD5] border border-[#FDBA74] text-[#C85A32] text-xs font-semibold rounded-full px-3 py-1">Culinária</span>
+          <span class="bg-[#FFEDD5] border border-[#FDBA74] text-[#C85A32] text-xs font-semibold rounded-full px-3 py-1">Confeitaria</span>
+          <span class="bg-[#FFEDD5] border border-[#FDBA74] text-[#C85A32] text-xs font-semibold rounded-full px-3 py-1">Experimentar</span>
+          <span class="bg-[#FFE4E6] border border-[#FECDD3] text-[#BE123C] text-xs font-semibold rounded-full px-3 py-1">Crochê</span>
+          <span class="bg-[#FFE4E6] border border-[#FECDD3] text-[#BE123C] text-xs font-semibold rounded-full px-3 py-1">Cerâmica</span>
+          <span class="bg-[#FFE4E6] border border-[#FECDD3] text-[#BE123C] text-xs font-semibold rounded-full px-3 py-1">Scrapbook</span>
+          <span class="bg-[#FEF3C7] border border-[#FDE68A] text-[#B45309] text-xs font-semibold rounded-full px-3 py-1">Planejar viagens</span>
+          <span class="bg-[#FEF3C7] border border-[#FDE68A] text-[#B45309] text-xs font-semibold rounded-full px-3 py-1">Viajar</span>
+          <span class="bg-[#FEF3C7] border border-[#FDE68A] text-[#B45309] text-xs font-semibold rounded-full px-3 py-1">Trilhas</span>
+        </div>
+      </div>
+    </section>
+
+    <section
+      class="p-8 md:p-10 rounded-3xl bg-[#FFF1EC] border border-[#F6D3C6] flex flex-col md:flex-row items-center justify-between gap-6"
+      id="connect"
+    >
+      <div class="space-y-1">
+        <div class="text-xs font-bold text-[#C85A32] uppercase tracking-wide">Aberta para colaborações &amp; conversas</div>
+        <h2 class="text-2xl md:text-3xl font-bold text-[#2E2825]">Vamos conversar</h2>
+        <p class="text-sm text-[#6B5E57] max-w-xl">
+          Tem uma pergunta sobre modelagem de dados, uma dica de receita, uma ideia de artesanato ou quer só dizer oi?
+          Adoraria ouvir de você.
+        </p>
+      </div>
+      <div class="flex flex-wrap items-center gap-3 shrink-0">
+        <a
+          class="px-5 py-2.5 rounded-full bg-white border border-[#2A6564]/30 hover:border-[#2A6564] text-sm font-semibold text-[#2E2825] hover:text-[#2A6564] transition-all"
+          href={socialUrls.github}
+          rel="noopener noreferrer"
+          target="_blank">GitHub</a
+        >
+        <a
+          class="px-5 py-2.5 rounded-full bg-white border border-[#2A6564]/30 hover:border-[#2A6564] text-sm font-semibold text-[#2E2825] hover:text-[#2A6564] transition-all"
+          href={socialUrls.linkedin}
+          rel="noopener noreferrer"
+          target="_blank">LinkedIn</a
+        >
+      </div>
+    </section>
+  </div>
+</Layout>

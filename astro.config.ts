@@ -46,6 +46,24 @@ export default defineConfig({
       subsets: ['latin'],
       fallbacks: ['sans-serif'],
     },
+    {
+      provider: fontProviders.fontsource(),
+      name: 'Montserrat',
+      cssVariable: '--font-montserrat',
+      weights: ['100 900'],
+      styles: ['normal'],
+      subsets: ['latin'],
+      fallbacks: ['sans-serif'],
+    },
+    {
+      provider: fontProviders.fontsource(),
+      name: 'Outfit',
+      cssVariable: '--font-outfit',
+      weights: ['300 800'],
+      styles: ['normal'],
+      subsets: ['latin'],
+      fallbacks: ['sans-serif'],
+    },
   ],
 
   integrations: [
@@ -137,4 +155,7 @@ export default defineConfig({
       },
     },
   },
+
+  site: 'https://helomininel.github.io',
+  base: '/heloworld',
 });
