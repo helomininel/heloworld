@@ -8,6 +8,14 @@ astro dev --background
 
 Manage the background server with `astro dev stop`, `astro dev status`, and `astro dev logs`.
 
+### Image metadata policy
+
+Committed images must not carry EXIF/XMP/metadata. A `pre-commit` hook (`.githooks/pre-commit`, via `core.hooksPath`) auto-strips staged JPEGs/PNGs using `scripts/strip-image-meta.mjs`. After a fresh clone, enable it with:
+
+```
+git config core.hooksPath .githooks
+```
+
 ## Documentation
 
 Full documentation: https://docs.astro.build
