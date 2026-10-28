@@ -1,0 +1,6 @@
+#!/bin/bash
+# Strip embedded image metadata (EXIF/XMP/PNG text chunks) from staged images
+# before committing. Requires the repo's node_modules (npm install).
+command -v node >/dev/null 2>&1 || exit 0
+[ -d node_modules/sharp ] || exit 0
+node scripts/strip-image-meta.mjs
