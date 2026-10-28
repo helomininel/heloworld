@@ -36,7 +36,7 @@ export interface RecipeText {
 
 interface RecipeEntry {
   id: string;
-  category: 'main' | 'bread' | 'breakfast' | 'desserts';
+  category: 'main' | 'bread' | 'desserts';
   /** Resolved image URL (ESM import) or '' when the recipe has no photo yet. */
   img: string;
   /** Extra photos shown as a gallery under the instructions (optional). */
