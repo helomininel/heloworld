@@ -13,6 +13,7 @@
 import pumpkinCupcakeImg from '~/assets/images/recipes/pumpkin-cupcake.jpg';
 import iogurtBerryCakeImg from '~/assets/images/recipes/iogurt-berry-cake-2.jpg';
 import iogurtBerryCupcakesImg from '~/assets/images/recipes/iogurt-berry-cupcakes.jpg';
+import stuffedBreadImg from '~/assets/images/recipes/stuffed-bread.jpg';
 
 export interface RecipeSource {
   label: string;
@@ -250,13 +251,13 @@ const recipes: RecipeEntry[] = [
     },
   },
   {
-    id: 'chicken-stuffed-bread',
+    id: 'stuffed-bread',
     category: 'bread',
-    img: '', // no photo yet — the grid/detail pages fall back to a placeholder
+    img: stuffedBreadImg.src,
     en: {
-      title: 'Stuffed Bread with Your Favourite Filling',
+      title: 'Stuffed Bread',
       categoryLabel: 'Bread',
-      time: '⏱ ~1 h prep + 2–3 h rises',
+      time: '⏱ 3 - 4h',
       servings: '● 2 loaves',
       level: 'Medium',
       desc: 'Soft, slightly sweet stuffed bread with a golden crust — fill it with creamy chicken, cheese and ham, or anything you like.',
@@ -316,9 +317,9 @@ const recipes: RecipeEntry[] = [
       ],
     },
     pt: {
-      title: 'Pão Recheado com o Recheio que Preferir',
+      title: 'Pão Recheado',
       categoryLabel: 'Pão',
-      time: '⏱ ~1 h de preparação + 2–3 h de fermentação',
+      time: '⏱ 3 - 4h',
       servings: '● 2 pães',
       level: 'Médio',
       desc: 'Pão recheado macio e levemente adocicado, com casquinha dourada — recheie com frango cremoso, fiambre e queijo, ou o que preferir.',
