@@ -1,0 +1,216 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import { recipesEn as recipes } from '~/data/recipes';
+import { getPermalink } from '~/utils/permalinks';
+
+const metadata = {
+  title: 'Recipes',
+  description: "Tested recipes, comfort bakes, and kitchen notes. Helo's digital cookbook.",
+};
+
+const filters = [
+  { id: 'all', label: 'All' },
+  { id: 'main', label: 'Main Dishes' },
+  { id: 'breakfast', label: 'Bread' },
+  { id: 'desserts', label: 'Desserts' },
+];
+---
+
+<Layout metadata={metadata}>
+  <div class="max-w-6xl mx-auto px-6 py-12 w-full space-y-10">
+    <!-- Cookbook header (matches the Data page hero) -->
+    <section class="flex flex-col md:flex-row items-start md:items-end justify-between gap-6">
+      <div class="flex flex-col max-w-2xl">
+        <div class="flex items-center gap-1 mb-1">
+          <span
+            class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#E8F3F1] border border-[#2A6564]/30 text-xs font-semibold text-[#2A6564]"
+          >
+            <span class="text-[#C85A32]">✦</span>
+            <span>Flavour Notebook</span>
+          </span>
+        </div>
+        <h1
+          class="text-[38px] md:text-[56px] leading-[46px] md:leading-[64px] tracking-[-0.02em] font-extrabold text-[#291710]"
+        >
+          Recipes
+        </h1>
+        <p class="text-[18px] leading-[28px] text-[#57423b] mt-1">
+          Recipes I've tried, favorites I've collected, and kitchen experiments worth sharing.
+        </p>
+        <div class="flex flex-wrap gap-2 pt-2 text-xs font-semibold text-[#6B5E57]">
+          <span class="px-3 py-1 rounded-full bg-white border border-[#F6D3C6]">● {recipes.length} Recipes</span>
+          <span class="px-3 py-1 rounded-full bg-white border border-[#F6D3C6]"
+            >● {new Set(recipes.map((r) => r.category)).size} Categories</span
+          >
+        </div>
+      </div>
+    </section>
+
+    <!-- Search & Filters -->
+    <div class="flex flex-col md:flex-row gap-4 items-center justify-between">
+      <div class="relative w-full md:w-80">
+        <input
+          id="recipe-search"
+          class="w-full pl-10 pr-4 py-2.5 rounded-full bg-white border border-[#F6D3C6] text-sm focus:outline-none focus:border-[#C85A32]"
+          placeholder="Search by recipe or ingredient..."
+          type="text"
+        />
+        <span class="material-symbols-outlined absolute left-3.5 top-3 text-lg text-[#6B5E57]">search</span>
+      </div>
+      <div
+        id="recipe-filters"
+        class="flex items-center gap-2 p-1.5 bg-[#fff1ec] rounded-full shadow-sm overflow-x-auto"
+      >
+        {
+          filters.map((f, i) => (
+            <button
+              type="button"
+              data-filter={f.id}
+              class:list={[
+                'px-4 py-1.5 rounded-full text-[13px] font-bold tracking-[0.03em] transition-all whitespace-nowrap',
+                i === 0
+                  ? 'bg-white text-[#9f3c16] shadow-sm'
+                  : 'text-[#57423b] hover:text-[#291710] hover:bg-[#ffe9e2]',
+              ]}
+            >
+              {f.label}
+            </button>
+          ))
+        }
+      </div>
+    </div>
+
+    <!-- Recipe Grid -->
+    <div id="recipe-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {
+        recipes.map((r) => (
+          <a
+            class="recipe-card group bg-white rounded-2xl border border-[#F6D3C6] overflow-hidden shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between"
+            href={getPermalink(`/recipes/${r.id}`)}
+            data-recipe={`${r.title} ${r.desc}`.toLowerCase()}
+            data-category={r.category}
+            data-id={r.id}
+            data-title={r.title}
+          >
+            <div>
+              <div class="h-44 overflow-hidden relative">
+                {r.img ? (
+                  <img alt={r.alt} class="w-full h-full object-cover" loading="lazy" src={r.img} />
+                ) : (
+                  <div class="w-full h-full bg-gradient-to-br from-[#FFEDD5] via-[#FEF3C7] to-[#FDBA74] flex items-center justify-center text-6xl">
+                    🧁
+                  </div>
+                )}
+                <span class="absolute top-3 left-3 px-2.5 py-0.5 rounded-full bg-white/90 text-[11px] font-bold text-[#6B5E57]">
+                  {r.categoryLabel}
+                </span>
+              </div>
+              <div class="p-5 space-y-2">
+                <div class="flex items-center justify-between text-xs text-[#6B5E57]">
+                  <span>{r.time}</span>
+                  <span>{r.servings}</span>
+                </div>
+                <h3 class="font-bold text-lg text-[#2E2825] group-hover:text-[#C85A32] transition-colors">{r.title}</h3>
+                <p class="text-xs text-[#6B5E57] leading-relaxed">{r.desc}</p>
+              </div>
+            </div>
+            <div class="p-5 pt-0 flex items-center justify-between">
+              <span class="px-4 py-2 rounded-full bg-[#FFF1EC] text-xs font-semibold text-[#2E2825] group-hover:bg-[#F6D3C6] transition-colors">
+                View Recipe
+              </span>
+              <span
+                class="share-btn w-8 h-8 rounded-full bg-[#FFF1EC] flex items-center justify-center text-[#6B5E57]"
+                aria-label="Share recipe"
+                role="button"
+                tabindex="0"
+              >
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92z" />
+                </svg>
+              </span>
+            </div>
+          </a>
+        ))
+      }
+    </div>
+    <p id="recipe-empty" class="hidden text-sm text-[#6B5E57] text-center py-8">
+      No recipes found. Try a different search or filter.
+    </p>
+  </div>
+</Layout>
+
+<script>
+  import { mountShareMenu, recipeUrlFor } from '~/scripts/recipe-sharing';
+
+  // Binds search, filters and share to the CURRENT page's DOM. Runs on every
+  // `astro:page-load` (view transitions replace the body, so listeners must be
+  // re-attached; the `bound` markers prevent double-binding within one DOM).
+  const initPage = () => {
+    const search = document.getElementById('recipe-search') as HTMLInputElement | null;
+    const filterWrap = document.getElementById('recipe-filters');
+    if (filterWrap?.dataset.bound) return;
+    if (filterWrap) filterWrap.dataset.bound = '1';
+
+    const cards = document.querySelectorAll<HTMLElement>('.recipe-card');
+    const empty = document.getElementById('recipe-empty');
+    let active = 'all';
+
+    const apply = () => {
+      const q = (search?.value ?? '').trim().toLowerCase();
+      let visible = 0;
+      cards.forEach((card) => {
+        const okFilter = active === 'all' || card.dataset.category === active;
+        const okSearch = !q || (card.dataset.recipe ?? '').includes(q);
+        const show = okFilter && okSearch;
+        card.classList.toggle('hidden', !show);
+        if (show) visible++;
+      });
+      empty?.classList.toggle('hidden', visible > 0);
+    };
+
+    search?.addEventListener('input', apply);
+
+    filterWrap?.addEventListener('click', (e) => {
+      const pill = (e.target as HTMLElement).closest<HTMLElement>('[data-filter]');
+      if (!pill) return;
+      active = pill.dataset.filter ?? 'all';
+      filterWrap.querySelectorAll<HTMLElement>('[data-filter]').forEach((p) => {
+        const on = p === pill;
+        p.classList.toggle('bg-white', on);
+        p.classList.toggle('text-[#9f3c16]', on);
+        p.classList.toggle('shadow-sm', on);
+        p.classList.toggle('text-[#57423b]', !on);
+      });
+      apply();
+    });
+
+    mountShareMenu({
+      shareBtnSel: '.share-btn',
+      getShare: (btn) => {
+        const card = btn.closest<HTMLElement>('.recipe-card');
+        if (!card?.dataset.id) return null;
+        return { title: card.dataset.title ?? '', url: recipeUrlFor(card.dataset.id) };
+      },
+      getMarkdown: () => '',
+      labels: {
+        linkToast: 'Link copied to share!',
+        copyToast: '',
+        sections: { ingredients: '', instructions: '', tips: '', sources: '' },
+        menu: {
+          whatsapp: '💬 WhatsApp',
+          facebook: '📘 Facebook',
+          x: '✖️ X',
+          copy: '🔗 Copy link',
+          native: '⋯ More options…',
+          copied: '✓ Copied!',
+        },
+      },
+    });
+
+    apply();
+  };
+
+  document.addEventListener('astro:page-load', initPage);
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initPage);
+  else initPage();
+</script>

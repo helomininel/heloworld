@@ -1,0 +1,327 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import { getPermalink } from '~/utils/permalinks';
+import { recipesPt, type Recipe } from '~/data/recipes';
+
+export function getStaticPaths() {
+  return recipesPt.map((r) => ({ params: { slug: r.id }, props: { recipe: r } }));
+}
+
+const { recipe } = Astro.props as { recipe: Recipe };
+const backHref = getPermalink('/pt/recipes');
+const homeHref = getPermalink('/pt');
+
+// Ingredient list with '## ' group headers → grouped sections.
+const groups: { label?: string; items: string[] }[] = [];
+for (const item of recipe.ingredients) {
+  if (item.startsWith('## ')) groups.push({ label: item.slice(3), items: [] });
+  else {
+    if (!groups.length) groups.push({ items: [] });
+    groups[groups.length - 1].items.push(item);
+  }
+}
+
+// Instruction strings like '<strong>Título.</strong> texto…' → { title, body }.
+const steps = recipe.instructions.map((s) => {
+  const m = s.match(/^<strong>(.*?)<\/strong>\s*([\s\S]*)$/);
+  return { title: m?.[1] ?? '', body: m ? m[2] : s };
+});
+
+const metadata = { title: recipe.title, description: recipe.desc };
+---
+
+<Layout metadata={metadata} lang="pt">
+  <div class="max-w-6xl mx-auto px-6 py-6 md:py-8 w-full flex flex-col">
+    <!-- Toast notification -->
+    <div
+      id="recipe-toast"
+      class="fixed bottom-6 right-6 z-50 transform transition-all duration-300 pointer-events-none flex items-center gap-3 px-5 py-3.5 rounded-full bg-[#2E2825] text-white shadow-xl translate-y-20 opacity-0"
+    >
+      <span class="material-symbols-outlined">check_circle</span>
+      <span class="text-sm font-medium" id="recipe-toast-text"></span>
+    </div>
+
+    <!-- Breadcrumb & return bar -->
+    <div class="flex flex-wrap items-center justify-between gap-4 pb-6">
+      <div class="flex items-center gap-2 text-sm text-[#6B5E57]">
+        <a class="hover:text-[#C85A32] transition-colors flex items-center gap-1" href={homeHref}>
+          <span class="material-symbols-outlined text-sm">home</span>
+          <span>Início</span>
+        </a>
+        <span class="text-[#F6D3C6]">/</span>
+        <a class="hover:text-[#C85A32] transition-colors" href={backHref}>Receitas</a>
+        <span class="text-[#F6D3C6]">/</span>
+        <span class="font-bold text-[#C85A32] truncate max-w-[200px] sm:max-w-none">{recipe.title}</span>
+      </div>
+      <a
+        class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold text-[#2E2825] hover:-translate-x-0.5 transition-transform"
+        href={backHref}
+      >
+        <span class="material-symbols-outlined text-sm">arrow_back</span>
+        <span>Voltar para o Caderno</span>
+      </a>
+    </div>
+
+    <!-- Hero header -->
+    <header class="relative overflow-hidden rounded-xl border border-[#F6D3C6] p-6 md:p-10 mb-8">
+      <div class="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-8">
+        <div class="max-w-2xl space-y-4">
+          <div class="flex flex-wrap items-center gap-2.5">
+            <span
+              class="px-3 py-1 rounded-full bg-[#FFF1EC] text-[#C85A32] font-semibold text-xs uppercase tracking-wider border border-[#F6D3C6]"
+              >{recipe.categoryLabel}</span
+            >
+            <span class="text-[#6B5E57] text-xs font-medium">Caderno de Sabores</span>
+          </div>
+          <h1 class="text-3xl md:text-4xl font-extrabold text-[#2E2825] tracking-tight leading-tight">
+            {recipe.title}
+          </h1>
+          <p class="text-base md:text-lg text-[#2E2825] leading-relaxed">{recipe.desc}</p>
+
+          <!-- Quick metrics -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
+            <div class="p-3.5 rounded-lg flex items-center gap-3">
+              <div class="w-10 h-10 rounded-full flex items-center justify-center text-[#C85A32] shrink-0">
+                <span class="material-symbols-outlined">timer</span>
+              </div>
+              <div>
+                <div class="text-[11px] uppercase tracking-wider text-[#6B5E57]">Tempo</div>
+                <div class="font-bold text-[#2E2825]">{recipe.time.replace('⏱ ', '')}</div>
+              </div>
+            </div>
+            <div class="p-3.5 rounded-lg flex items-center gap-3">
+              <div class="w-10 h-10 rounded-full flex items-center justify-center text-[#2A6564] shrink-0">
+                <span class="material-symbols-outlined">restaurant</span>
+              </div>
+              <div>
+                <div class="text-[11px] uppercase tracking-wider text-[#6B5E57]">Doses</div>
+                <div class="font-bold text-[#2E2825]">{recipe.servings.replace('● ', '')}</div>
+              </div>
+            </div>
+            <div class="p-3.5 rounded-lg flex items-center gap-3">
+              <div class="w-10 h-10 rounded-full flex items-center justify-center text-[#D88A3A] shrink-0">
+                <span class="material-symbols-outlined">bolt</span>
+              </div>
+              <div>
+                <div class="text-[11px] uppercase tracking-wider text-[#6B5E57]">Nível</div>
+                <div class="font-bold text-[#2E2825]">{recipe.level ?? '—'}</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Actions -->
+          <div class="flex flex-wrap items-center justify-start gap-3 pt-4">
+            <button
+              id="page-share-btn"
+              type="button"
+              class="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-[#2E2825] text-sm font-semibold transition-transform active:scale-95"
+            >
+              <span class="material-symbols-outlined text-base">share</span>
+              <span>Partilhar</span>
+            </button>
+            <button
+              id="page-copy-btn"
+              type="button"
+              class="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-[#6B5E57] text-sm font-semibold transition-transform active:scale-95"
+            >
+              <span class="material-symbols-outlined text-base">content_copy</span>
+              <span>Copiar</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Hero image -->
+        <div class="w-full lg:w-80 shrink-0">
+          <div class="relative rounded-lg overflow-hidden shadow-md group">
+            {
+              recipe.img ? (
+                <img
+                  class="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-500"
+                  src={recipe.img}
+                  alt={recipe.alt}
+                />
+              ) : (
+                <div class="w-full h-80 bg-gradient-to-br from-[#FFEDD5] via-[#FEF3C7] to-[#FDBA74] flex items-center justify-center text-8xl">
+                  🧁
+                </div>
+              )
+            }
+            <div class="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent"></div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Two-column body: mise-en-place | step-by-step -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-8">
+      <!-- Left: ingredients -->
+      <aside class="lg:col-span-5">
+        <div class="p-6 md:p-8 rounded-xl border border-[#F6D3C6] space-y-6 h-full">
+          <span class="text-xs font-bold text-[#C85A32] uppercase tracking-widest">Ingredientes</span>
+          {
+            groups.map((g, gi) => (
+              <div class:list={['space-y-3', gi === 0 && 'pt-2']}>
+                {g.label && <h3 class="font-bold text-sm text-[#2E2825]">{g.label}</h3>}
+                <div class="space-y-3">
+                  {g.items.map((item) => (
+                    <div class="flex items-start gap-3 p-3 rounded-lg">
+                      <span class="w-2.5 h-2.5 rounded-full bg-[#C85A32] mt-1.5 shrink-0" />
+                      <div class="flex-1 text-sm text-[#2E2825] font-bold">{item}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </aside>
+
+      <!-- Right: step-by-step timeline -->
+      <main class="lg:col-span-7">
+        <div class="p-6 md:p-8 rounded-xl border border-[#F6D3C6] space-y-8 h-full">
+          <span class="text-xs font-bold text-[#2A6564] uppercase tracking-widest">Preparação</span>
+          <ol class="space-y-8">
+            {
+              steps.map((step, i) => (
+                <li class="relative pl-14 group">
+                  <div class="absolute left-0 top-0 w-10 h-10 rounded-full flex items-center justify-center text-[#C85A32] font-bold">
+                    {i + 1}
+                  </div>
+                  <div class="space-y-2">
+                    {step.title && <h3 class="text-lg text-[#2E2825]" set:html={step.title} />}
+                    <p class="text-sm text-[#2E2825] leading-relaxed" set:html={step.body} />
+                  </div>
+                </li>
+              ))
+            }
+          </ol>
+        </div>
+      </main>
+    </div>
+
+    <!-- Tips (beside the gallery when the recipe has extra photos) -->
+    {
+      ((recipe.tips?.length ?? 0) > 0 || recipe.gallery?.length) && (
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-8">
+          {(recipe.tips?.length ?? 0) > 0 && (
+            <section
+              class:list={[
+                'p-5 md:p-6 rounded-xl border border-[#F6D3C6] space-y-2',
+                recipe.gallery?.length ? 'lg:col-span-8' : 'lg:col-span-12',
+              ]}
+            >
+              <div class="flex items-center gap-2.5 text-[#C85A32]">
+                <div class="w-8 h-8 rounded-full flex items-center justify-center">
+                  <span class="material-symbols-outlined">tips_and_updates</span>
+                </div>
+                <h3 class="text-xs font-bold uppercase tracking-widest">Dicas e Notas</h3>
+              </div>
+              <ul class="sm:grid sm:grid-cols-2 sm:gap-x-8 gap-y-1 text-sm text-[#2E2825] leading-relaxed list-disc list-inside">
+                {recipe.tips.map((tip) => (
+                  <li>{tip}</li>
+                ))}
+              </ul>
+            </section>
+          )}
+          {recipe.gallery?.length && (
+            <aside class="lg:col-span-4 flex items-center justify-center">
+              <div class="grid grid-cols-2 lg:grid-cols-1 gap-4">
+                {recipe.gallery.map((src) => (
+                  <div class="w-48 h-48 rounded-xl overflow-hidden">
+                    <img class="w-full h-full object-cover" src={src} alt={recipe.alt} loading="lazy" />
+                  </div>
+                ))}
+              </div>
+            </aside>
+          )}
+        </div>
+      )
+    }
+
+    <!-- Full-width: sources -->
+    {
+      (recipe.sources?.length ?? 0) > 0 && (
+        <section class="px-6 py-6 md:px-8 md:py-6 rounded-xl border border-[#F6D3C6] space-y-10">
+          <span class="text-xs font-bold text-[#2A6564] uppercase tracking-widest">Fontes das Receitas</span>
+          <ul class="flex flex-wrap gap-x-6 gap-y-1 text-sm text-[#2E2825]">
+            {recipe.sources.map((s, si) => (
+              <li class="flex items-center gap-3">
+                {si > 0 && <span class="w-1.5 h-1.5 rounded-full bg-[#C85A32]/40" aria-hidden="true" />}
+                <a
+                  class="text-[#2E2825] hover:text-[#C85A32] hover:underline"
+                  href={s.url}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  {s.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
+
+    <!-- Recipe data for the copy button -->
+    <script
+      is:inline
+      type="application/json"
+      id="recipe-data"
+      set:html={JSON.stringify({
+        title: recipe.title,
+        time: recipe.time,
+        servings: recipe.servings,
+        desc: recipe.desc,
+        ingredients: recipe.ingredients,
+        instructions: recipe.instructions,
+        tips: recipe.tips ?? [],
+        sources: recipe.sources ?? [],
+      })}
+    />
+  </div>
+</Layout>
+
+<script>
+  import { buildRecipeMarkdown, mountShareMenu } from '~/scripts/recipe-sharing';
+
+  // Re-vincula a cada `astro:page-load` (as view transitions substituem o body).
+  const initPage = () => {
+    const dataEl = document.getElementById('recipe-data');
+    if (!dataEl || dataEl.dataset.bound) return;
+    dataEl.dataset.bound = '1';
+
+    const recipe = JSON.parse(dataEl.textContent!);
+    const labels = {
+      copyToast: 'Receita copiada! Cola em qualquer lado.',
+      linkToast: 'Link copiado para partilhar!',
+      sections: {
+        ingredients: 'Ingredientes',
+        instructions: 'Preparação',
+        tips: 'Dicas e Notas',
+        sources: 'Fontes das Receitas',
+      },
+      menu: {
+        whatsapp: '💬 WhatsApp',
+        facebook: '📘 Facebook',
+        x: '✖️ X',
+        copy: '🔗 Copiar link',
+        native: '⋯ Mais opções…',
+        copied: '✓ Copiado!',
+      },
+    } as const;
+
+    mountShareMenu({
+      shareBtnSel: '#page-share-btn',
+      copyBtnSel: '#page-copy-btn',
+      getShare: () => ({ title: recipe.title, url: window.location.href }),
+      getMarkdown: () => buildRecipeMarkdown(recipe, labels),
+      labels,
+      toastId: 'recipe-toast',
+      toastTextId: 'recipe-toast-text',
+    });
+  };
+
+  document.addEventListener('astro:page-load', initPage);
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initPage);
+  else initPage();
+</script>
