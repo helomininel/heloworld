@@ -20,8 +20,8 @@ pnpm-debug.log*
 .DS_Store
 
 # pnpm-specific files: pnpm is supported for local use (see .pnpmrc), but
-# package-lock.json is the tracked lockfile and npm is what CI, Docker and
-# the deploy targets run. Committing these would let the two trees diverge.
+# package-lock.json is the tracked lockfile and npm is what CI and the
+# deploy workflow run. Committing these would let the two trees diverge.
 pnpm-lock.yaml
 pnpm-workspace.yaml
 

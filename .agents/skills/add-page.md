@@ -12,7 +12,6 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
 import Hero from '~/components/widgets/Hero.astro';
-import Features from '~/components/widgets/Features.astro';
 
 const metadata = {
   title: 'Page Title',
@@ -30,24 +29,16 @@ const metadata = {
       alt: 'Hero image description',
     }}
   />
-
-  <Features
-    title="Section Title"
-    items={[
-      { title: 'Feature 1', description: 'Description', icon: 'tabler:star' },
-      { title: 'Feature 2', description: 'Description', icon: 'tabler:rocket' },
-    ]}
-  />
 </Layout>
 ```
 
 ## Available Widget Components
 
-Hero, Features, Content, Steps, Testimonials, FAQs, Stats, Pricing, Brands, CallToAction, Contact, Team
+Hero, Features2, Features3, Stats, Steps2, Team, Timeline, Newsletter
 
 ## Notes
 
 - Pages in `src/pages/` are automatically routed by filename
-- Use `PageLayout` (includes Header + Footer) or `Layout` (bare)
+- Use `PageLayout` (includes the site header and footer) or `Layout` (bare)
 - All widgets accept an `id` prop for anchor links
 - Icons use the `tabler:icon-name` format from `@iconify-json/tabler`

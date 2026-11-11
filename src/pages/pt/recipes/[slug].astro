@@ -1,10 +1,11 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
 import { getPermalink } from '~/utils/permalinks';
-import { recipesPt, type Recipe } from '~/data/recipes';
+import { getRecipes, type Recipe } from '~/utils/recipes';
 
-export function getStaticPaths() {
-  return recipesPt.map((r) => ({ params: { slug: r.id }, props: { recipe: r } }));
+export async function getStaticPaths() {
+  const recipes = await getRecipes('pt');
+  return recipes.map((r) => ({ params: { slug: r.id }, props: { recipe: r } }));
 }
 
 const { recipe } = Astro.props as { recipe: Recipe };

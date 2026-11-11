@@ -8,13 +8,13 @@ Helo's corner of the internet — a personal portfolio & craft hub where data pr
 
 - **Home** — hero, about section, and skill tags (EN/PT)
 - **Data & Analytics** — data projects and articles
-- **Recipes** — a small cookbook with bilingual (`/recipes` + `/pt/recipes`) detail pages, generated from [`src/data/recipes.ts`](src/data/recipes.ts)
+- **Recipes** — a small cookbook with bilingual (`/recipes` + `/pt/recipes`) detail pages, generated from one markdown file per recipe in [`src/data/recipes/`](src/data/recipes) (`en/` and `pt/`)
 - **Crafts & DIY** — crochet patterns and projects
 - **Travel** — a travel journal
 
 ## Tech
 
-[Astro](https://astro.build/) (static) + [Tailwind CSS v4](https://tailwindcss.com/). Content is code-first: page copy lives in [`src/i18n/content.ts`](src/i18n/content.ts) (EN/PT), recipes in [`src/data/recipes.ts`](src/data/recipes.ts), and site-wide settings (base path, SEO defaults, blog flags) in [`src/config.yaml`](src/config.yaml).
+[Astro](https://astro.build/) (static) + [Tailwind CSS v4](https://tailwindcss.com/). Content is code-first: page copy lives in [`src/i18n/content.ts`](src/i18n/content.ts) (EN/PT), recipes as markdown in [`src/data/recipes/`](src/data/recipes), and site-wide settings (base path, SEO defaults, blog flags) in [`src/config.yaml`](src/config.yaml).
 
 ## Development
 

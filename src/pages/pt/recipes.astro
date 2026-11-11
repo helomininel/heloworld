@@ -1,7 +1,9 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
-import { recipesPt as recipes } from '~/data/recipes';
+import { getRecipes } from '~/utils/recipes';
 import { getPermalink } from '~/utils/permalinks';
+
+const recipes = await getRecipes('pt');
 
 const metadata = {
   title: 'Receitas',
