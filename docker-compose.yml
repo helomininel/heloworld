@@ -1,6 +1,0 @@
-services:
-  heloworld:
-    build: .
-    container_name: heloworld
-    ports:
-      - 8080:8080

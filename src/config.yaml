@@ -18,7 +18,7 @@ metadata:
   openGraph:
     site_name: HeloWorld
     images:
-      - url: '~/assets/images/og.png'
+      - url: '~/assets/images/og.webp'
         width: 1200
         height: 630
     type: website

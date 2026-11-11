@@ -68,6 +68,29 @@ const postCollection = defineCollection({
   }),
 });
 
+// One file per recipe and language: src/data/recipes/<en|pt>/<slug>.md.
+// The body holds the sections (## Ingredients, ## Instructions, ## Tips,
+// ## Sources); see src/utils/recipes.ts for how they are read.
+const recipeCollection = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: 'src/data/recipes' }),
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      categoryLabel: z.string(),
+      category: z.enum(['main', 'bread', 'desserts']),
+      time: z.string(),
+      servings: z.string(),
+      /** Difficulty shown in the hero metrics (e.g. 'Easy' / 'Fácil'). */
+      level: z.string().optional(),
+      desc: z.string(),
+      alt: z.string(),
+      image: image().optional(),
+      /** Extra photos shown as a gallery under the instructions. */
+      gallery: z.array(image()).optional(),
+    }),
+});
+
 export const collections = {
   post: postCollection,
+  recipes: recipeCollection,
 };

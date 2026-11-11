@@ -40,7 +40,7 @@ Values that already come from Astro **must not** be passed through `getPermalink
 
 ## Comparing paths (active links, canonicals)
 
-Compare without trailing slashes, e.g. `trimSlash(a) === trimSlash(b)` (`trimSlash` from `src/utils/permalinks.ts`). `Header.astro` does this for the active menu item.
+Compare without trailing slashes, e.g. `trimSlash(a) === trimSlash(b)` (`trimSlash` from `src/utils/permalinks.ts`). `PageLayout.astro` does this for the active menu item.
 
 ## Verify
 
