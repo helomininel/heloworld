@@ -7,9 +7,9 @@ servings: '● 10 porções'
 level: 'Fácil'
 desc: 'Um bolo simples de iogurte e azeite, com frutos vermelhos e amêndoa laminada. Fácil de preparar à mão e perfeito para aproveitar fruta fresca ou congelada.'
 alt: 'Bolo de iogurte, azeite e frutos vermelhos com amêndoa laminada'
-image: '../../../assets/images/recipes/iogurt-berry-cake-2.jpg'
+image: '../../../assets/images/recipes/iogurt-berry-cake-2.webp'
 gallery:
-  - '../../../assets/images/recipes/iogurt-berry-cupcakes.jpg'
+  - '../../../assets/images/recipes/iogurt-berry-cupcakes.webp'
 ---
 
 ## Ingredientes

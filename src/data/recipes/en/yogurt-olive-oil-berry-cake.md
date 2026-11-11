@@ -7,9 +7,9 @@ servings: '● 10 servings'
 level: 'Easy'
 desc: 'A simple yogurt and olive oil cake filled with juicy berries and topped with sliced almonds. Easy to make by hand, with fresh or frozen fruit.'
 alt: 'Yogurt, olive oil and berry cake topped with sliced almonds'
-image: '../../../assets/images/recipes/iogurt-berry-cake-2.jpg'
+image: '../../../assets/images/recipes/iogurt-berry-cake-2.webp'
 gallery:
-  - '../../../assets/images/recipes/iogurt-berry-cupcakes.jpg'
+  - '../../../assets/images/recipes/iogurt-berry-cupcakes.webp'
 ---
 
 ## Ingredients

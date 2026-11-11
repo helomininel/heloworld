@@ -7,7 +7,7 @@ servings: '● 2 pães'
 level: 'Médio'
 desc: 'Pão recheado macio e levemente adocicado, com casquinha dourada — recheie com frango cremoso, fiambre e queijo, ou o que preferir.'
 alt: 'Pão recheado entrançado dourado com recheio cremoso'
-image: '../../../assets/images/recipes/stuffed-bread.jpg'
+image: '../../../assets/images/recipes/stuffed-bread.webp'
 ---
 
 ## Ingredientes

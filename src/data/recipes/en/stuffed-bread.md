@@ -7,7 +7,7 @@ servings: '● 2 loaves'
 level: 'Medium'
 desc: 'Soft, slightly sweet stuffed bread with a golden crust — fill it with creamy chicken, cheese and ham, or anything you like.'
 alt: 'Golden braided stuffed bread with a creamy filling'
-image: '../../../assets/images/recipes/stuffed-bread.jpg'
+image: '../../../assets/images/recipes/stuffed-bread.webp'
 ---
 
 ## Ingredients

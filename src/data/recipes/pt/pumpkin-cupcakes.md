@@ -7,7 +7,7 @@ servings: '● 12 cupcakes'
 level: 'Fácil'
 desc: 'Cupcakes de abóbora e especiarias, cobertos com creme de Cream Cheese.'
 alt: 'Cupcakes de abóbora com cobertura de cream cheese'
-image: '../../../assets/images/recipes/pumpkin-cupcake.jpg'
+image: '../../../assets/images/recipes/pumpkin-cupcake.webp'
 ---
 
 ## Ingredientes

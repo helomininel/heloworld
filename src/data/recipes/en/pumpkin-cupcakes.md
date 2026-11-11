@@ -7,7 +7,7 @@ servings: '● 12 servings'
 level: 'Easy'
 desc: 'Moist pumpkin spice cupcakes topped with a creamy, tangy cream cheese frosting.'
 alt: 'Pumpkin cupcakes with cream cheese frosting'
-image: '../../../assets/images/recipes/pumpkin-cupcake.jpg'
+image: '../../../assets/images/recipes/pumpkin-cupcake.webp'
 ---
 
 ## Ingredients
