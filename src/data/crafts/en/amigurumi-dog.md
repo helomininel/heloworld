@@ -7,26 +7,14 @@ alt: 'Crochet amigurumi dog'
 
 ## Abbreviations
 
-| Abbr. | Meaning                          |
-| ----- | -------------------------------- |
-| ch    | chain                            |
-| sc    | single crochet                   |
-| st(s) | stitch(es)                       |
-| inc   | increase (2 sc in 1 st)          |
-| dec   | decrease (2 sts worked together) |
-| hdc   | half double crochet              |
-
-### Colors
-
-| Abbr. | Yarn  |
-| ----- | ----- |
-| bn    | brown |
-| be    | beige |
-| wh    | white |
-| bl    | blue  |
-| rd    | red   |
-| bk    | black |
-| cr    | cream |
+| Abbr. | Meaning                          | Abbr. | Color |
+| ----- | -------------------------------- | ----- | ----- |
+| ch    | chain                            | cr    | brown |
+| sc    | single crochet                   | be    | beige |
+| st(s) | stitch(es)                       | wh    | white |
+| inc   | increase (2 sc in 1 st)          | bl    | blue  |
+| dec   | decrease (2 sts worked together) | rd    | red   |
+| hdc   | half double crochet              | bk    | black |
 
 ## Body
 
@@ -41,13 +29,13 @@ For the body, use beige (be), blue (bl) and white (wh) yarn.
 7. Round 7: [5 sc, inc] x 6 (42)
 8. Round 8: [6 sc, inc] x 6 (48)
 9. Rounds 9–23: 1 sc in each st (48)
-10. Rounds 24–25: switch to cream (cr), 1 sc in each st (48)
+10. Rounds 24–25: switch to cream, 1 sc in each st (48)
 11. Rounds 26–27: switch to blue (bl), 1 sc in each st (48)
-12. Rounds 28–29: switch to cream (cr), 1 sc in each st (48)
+12. Rounds 28–29: switch to cream, 1 sc in each st (48)
 13. Rounds 30–31: switch to blue (bl), 1 sc in each st (48)
-14. Rounds 32–33: switch to cream (cr), 1 sc in each st (48)
+14. Rounds 32–33: switch to cream, 1 sc in each st (48)
 15. Rounds 34–35: switch to blue (bl), 1 sc in each st (48)
-16. Rounds 36–37: switch to cream (cr), 1 sc in each st (48)
+16. Rounds 36–37: switch to cream, 1 sc in each st (48)
 17. Round 38: switch to blue (bl), [6 sc, dec] x 6 (42)
 18. Round 39: 1 sc in each st (42)
 19. Round 40: [5 sc, dec] x 6 (36)
@@ -100,7 +88,7 @@ For the front legs, use beige (be).
 6. Round 6: working in the back loops only, 1 sc in each st (24)
 7. Round 7: dec x 6, 12 sc (18)
 8. Round 8: dec x 3, 12 sc (15)
-9. Switch to cream (cr).
+9. Switch to cream.
 10. Rounds 9–10: 1 sc in each st (15)
 11. Switch to blue (bl).
 12. Rounds 11–12: 1 sc in each st (15)
@@ -139,7 +127,7 @@ For the head, use beige (be).
 
 ## Ears (make 2)
 
-For the ears, use brown (bn).
+For the ears, use brown (cr).
 
 1. Round 1: 6 sc into a magic ring (6)
 2. Round 2: inc x 6 (12)

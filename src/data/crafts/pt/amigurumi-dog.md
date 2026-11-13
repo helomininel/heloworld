@@ -20,7 +20,7 @@ alt: 'Amigurumi cão de crochê'
 
 | Abrev. | Fio      |
 | ------ | -------- |
-| ca     | castanho |
+| cr     | castanho |
 | be     | bege     |
 | br     | branco   |
 | az     | azul     |
@@ -138,7 +138,7 @@ Para a cabeça, use o fio bege (be).
 
 ## Orelhas (fazer 2)
 
-Para as orelhas, use o fio castanho (ca).
+Para as orelhas, use o fio castanho (cr).
 
 1. Carreira 1: faça 6 pb dentro do anel mágico (6)
 2. Carreira 2: aum x 6 (12)
