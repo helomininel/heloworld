@@ -1,6 +1,7 @@
 import { defineCollection } from 'astro:content';
 import { z } from 'astro/zod';
 import { glob } from 'astro/loaders';
+import { craftCategoryIds } from './utils/crafts';
 
 const metadataDefinition = () =>
   z
@@ -90,7 +91,22 @@ const recipeCollection = defineCollection({
     }),
 });
 
+// One markdown file per craft pattern and language: src/data/crafts/<en|pt>/<slug>.md.
+const craftCollection = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: 'src/data/crafts' }),
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      category: z.enum(craftCategoryIds),
+      desc: z.string(),
+      alt: z.string().optional(),
+      image: image().optional(),
+      gallery: z.array(image()).optional(),
+    }),
+});
+
 export const collections = {
   post: postCollection,
   recipes: recipeCollection,
+  crafts: craftCollection,
 };

@@ -1,0 +1,17 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import CraftDetail from '~/components/crafts/CraftDetail.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const crafts = await getCollection('crafts', ({ id }) => id.startsWith('pt/'));
+  return crafts.map((entry) => ({ params: { slug: entry.id.split('/')[1] }, props: { entry } }));
+}
+
+const { entry } = Astro.props;
+const metadata = { title: entry.data.title, description: entry.data.desc };
+---
+
+<Layout metadata={metadata} lang="pt">
+  <CraftDetail lang="pt" entry={entry} />
+</Layout>

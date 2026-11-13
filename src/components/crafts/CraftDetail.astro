@@ -1,0 +1,83 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { render } from 'astro:content';
+import { getPermalink } from '~/utils/permalinks';
+import { craftCategories, craftsCopy } from '~/utils/crafts';
+import type { Lang } from '~/i18n/content';
+
+interface Props {
+  lang: Lang;
+  entry: CollectionEntry<'crafts'>;
+}
+
+const { lang, entry } = Astro.props;
+const { Content } = await render(entry);
+const { data } = entry;
+const copy = craftsCopy[lang];
+
+const backHref = getPermalink(lang === 'pt' ? '/pt/crochet' : '/crochet');
+const homeHref = getPermalink(lang === 'pt' ? '/pt' : '/');
+---
+
+<!-- One craft pattern: breadcrumb, header, rendered markdown and photos (EN and PT share this markup). -->
+<div class="max-w-4xl mx-auto px-6 py-6 md:py-8 w-full flex flex-col">
+  <!-- Breadcrumb & return bar -->
+  <div class="flex flex-wrap items-center justify-between gap-4 pb-6">
+    <div class="flex items-center gap-2 text-sm text-[#6B5E57]">
+      <a class="hover:text-[#C85A32] transition-colors flex items-center gap-1" href={homeHref}>
+        <span class="material-symbols-outlined text-sm">home</span>
+        <span>{copy.home}</span>
+      </a>
+      <span class="text-[#F6D3C6]">/</span>
+      <a class="hover:text-[#C85A32] transition-colors" href={backHref}>{copy.crafts}</a>
+      <span class="text-[#F6D3C6]">/</span>
+      <span class="font-bold text-[#C85A32] truncate max-w-[200px] sm:max-w-none">{data.title}</span>
+    </div>
+    <a
+      class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold text-[#2E2825] hover:-translate-x-0.5 transition-transform"
+      href={backHref}
+    >
+      <span class="material-symbols-outlined text-sm">arrow_back</span>
+      <span>{copy.backToCrafts}</span>
+    </a>
+  </div>
+
+  <!-- Hero header -->
+  <header class="relative overflow-hidden rounded-xl border border-[#F6D3C6] p-6 md:p-10 mb-8 space-y-4">
+    <div class="flex flex-wrap items-center gap-2.5">
+      <span
+        class="px-3 py-1 rounded-full bg-[#FFF1EC] text-[#C85A32] font-semibold text-xs uppercase tracking-wider border border-[#F6D3C6]"
+        >{craftCategories[lang][data.category]}</span
+      >
+      <span class="text-[#6B5E57] text-xs font-medium">{copy.pill}</span>
+    </div>
+    <h1 class="text-3xl md:text-4xl font-extrabold text-[#2E2825] tracking-tight leading-tight">{data.title}</h1>
+    <p class="text-base md:text-lg text-[#2E2825] leading-relaxed">{data.desc}</p>
+    {
+      data.image && (
+        <div class="rounded-lg overflow-hidden shadow-md">
+          <img class="w-full max-h-[480px] object-cover" src={data.image.src} alt={data.alt ?? data.title} />
+        </div>
+      )
+    }
+  </header>
+
+  <!-- Pattern -->
+  <article
+    class="prose prose-stone max-w-none prose-headings:text-[#2E2825] prose-headings:font-bold prose-table:text-sm prose-img:rounded-lg prose-img:shadow-md p-6 md:p-8 rounded-xl border border-[#F6D3C6] bg-white"
+  >
+    <Content />
+  </article>
+
+  {
+    data.gallery?.length && (
+      <section class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8">
+        {data.gallery.map((photo) => (
+          <div class="rounded-xl overflow-hidden shadow-sm">
+            <img class="w-full h-full object-cover" src={photo.src} alt={data.alt ?? data.title} loading="lazy" />
+          </div>
+        ))}
+      </section>
+    )
+  }
+</div>
