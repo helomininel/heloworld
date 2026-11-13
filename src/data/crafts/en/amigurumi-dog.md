@@ -7,14 +7,29 @@ alt: 'Crochet amigurumi dog'
 
 ## Abbreviations
 
-| Abbr. | Meaning                          | Abbr. | Color |
-| ----- | -------------------------------- | ----- | ----- |
-| ch    | chain                            | cr    | brown |
-| sc    | single crochet                   | be    | beige |
-| st(s) | stitch(es)                       | wh    | white |
-| inc   | increase (2 sc in 1 st)          | bl    | blue  |
-| dec   | decrease (2 sts worked together) | rd    | red   |
-| hdc   | half double crochet              | bk    | black |
+<div
+  class="grid grid-cols-1 md:grid-cols-2 [&_table]:w-full [&_table]:table-fixed [&_th:first-child]:w-1/4 [&>div:first-child]:border-b [&>div:first-child]:pb-6 [&>div:first-child]:[border-color:var(--tw-prose-td-borders)] [&>div:last-child]:pt-6 md:[&>div:first-child]:border-b-0 md:[&>div:first-child]:border-r md:[&>div:first-child]:pb-0 md:[&>div:first-child]:pr-6 md:[&>div:last-child]:pt-0 md:[&>div:last-child]:pl-6"
+>
+
+| Abbr. | Meaning                          |
+| ----- | -------------------------------- |
+| ch    | chain                            |
+| sc    | single crochet                   |
+| st(s) | stitch(es)                       |
+| inc   | increase (2 sc in 1 st)          |
+| dec   | decrease (2 sts worked together) |
+| hdc   | half double crochet              |
+
+| Abbr. | Color |
+| ----- | ----- |
+| cr    | brown |
+| be    | beige |
+| wh    | white |
+| bl    | blue  |
+| rd    | red   |
+| bk    | black |
+
+</div>
 
 ## Body
 
